@@ -1,6 +1,7 @@
 /*
 || @author         Brett Hagman <bhagman@wiring.org.co>
 || @url            http://wiring.org.co/
+|| @contribution   Alexander Brevig <abrevig@wiring.org.co>
 ||
 || @description
 || | An Example for the Example Wiring Library
@@ -14,7 +15,7 @@
 
 #include <ExampleLibrary.h>
 
-ExampleLibrary widget = ExampleLibrary(FORWARD);
+ExampleLibrary widget = ExampleLibrary();
 
 
 void setup()
@@ -28,6 +29,11 @@ void setup()
 void loop()
 {
   widget.doThatThing();
+
+  if (widget.total <= 0)
+    widget.increment = 1;
+  if (widget.total >= 10)
+    widget.increment = -1;
 
   delay(500);
 }

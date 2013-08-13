@@ -1,7 +1,7 @@
-/* $Id$
 /*
 || @author         Brett Hagman <bhagman@wiring.org.co>
 || @url            http://wiring.org.co/
+|| @contribution   Alexander Brevig <abrevig@wiring.org.co>
 ||
 || @description
 || | Example Wiring Library
@@ -20,10 +20,12 @@
 || Constructor
 */
 
-ExampleLibrary::ExampleLibrary(int direction)
-: total(0)
+ExampleLibrary::ExampleLibrary(int value)
+: increment(ExampleLibrary::incrementAssignSafteyGuard),  // Prepare our ConstrainedProperty 'increment'
+  total(_total)                                           // Prepare our ConstantProperty 'total'
 {
-  setIncrement(direction);
+  increment = 1;
+  increment = value;
 }
 
 
@@ -33,9 +35,14 @@ ExampleLibrary::ExampleLibrary(int direction)
 
 void ExampleLibrary::doThatThing()
 {
-  total += increment;
+  _total += increment;
 
-  Serial.println(total, DEC);
+  Serial.println(_total, DEC);
+}
+
+void ExampleLibrary::reset()
+{
+  _total = 0;
 }
 
 
@@ -43,8 +50,9 @@ void ExampleLibrary::doThatThing()
 || Private Methods
 */
 
-void ExampleLibrary::setIncrement(int value)
+bool ExampleLibrary::incrementAssignSafteyGuard(int value)
 {
-  increment = value;
+  // Accept any value except 0.
+  return value != 0;
 }
 
