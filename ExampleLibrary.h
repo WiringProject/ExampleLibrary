@@ -21,15 +21,16 @@
 #endif
 
 #include <Wiring.h>
+// This is temporary, as WProperty.h will be included from Wiring.h
 #include "WProperty.h"
 
 /*
 || ExampleLibrary version
-|| @Version 1.0.0
+|| @Version 2.0.0
 */
 
-// Version below is 1 00 00 (integer representation of above)
-#define EXAMPLELIBRARY_VERSION          10000
+// Version below is 2 00 00 (integer representation of above)
+#define EXAMPLELIBRARY_VERSION          20000
 
 
 /*
@@ -55,7 +56,6 @@ class ExampleLibrary
     static bool incrementAssignSafteyGuard(int value);
 
     // Members
-    int _increment;
     int _total;
 };
 
